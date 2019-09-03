@@ -8,8 +8,8 @@ console.log(nth(list, 4));
 
 function arrayToList(arr) {
 	let list = null;
-	while (arr.length > 0) {
-		list = prepend(arr.pop(), list);
+	for (let i = arr.length - 1; i >= 0; i--) {
+		list = prepend(arr[i], list);
 	}
 	return list;
 }
