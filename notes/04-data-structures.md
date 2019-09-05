@@ -74,3 +74,86 @@ A property can be removed using the `delete` keyword:
 
 	delete obj.d;
 	let d = obj.d; // undefined
+
+The `in` operator finds out, whether or not a given string is a property name
+of a given object:
+
+	let o = {a: 1, b: 2, c: 3};
+	let hasA = 'a' in o; // true
+	let hasC = 'c' in o; // true
+	let hasD = 'd' in o; // false
+
+The `Object.keys` function returns an array containing all property names of
+the given object:
+
+	let o = {a: 1, b: 2, c: 3};
+	let l = Object.keys(o); // ["a", "b", "c"]
+
+The `Object.assign` function copies all properties from the second object to
+the first, and returns the first:
+
+	let into = {a: 1, b: 2, c: 3};
+	let from = {c: 9, d: 5};
+	Object.assign(into, from); // { a: 1, b: 2, c: 9, d: 5 }
+
+An array is an object:
+
+	let arr = [];
+	typeof arr; // "object"
+
+The array's `include` method checks whether or not a given value is contained
+in the array:
+
+	let arr = [1, 2, 3];
+	arr.includes(1); // true
+	arr.includes(4); // false
+
+The `in` operator iterates over the properties of an array, i.e. its indices:
+
+	let arr = [1, 2, 3];
+	for (let i in arr) {
+		console.log(i);
+	}
+	// prints: 0 1 2
+
+The `of` operator iterates over the values of an array:
+
+	let arr = [1, 2, 3];
+	for (let v of arr) {
+		console.log(v);
+	}
+	// prints: 1 2 3
+
+The array methods `indexOf` and `lastIndexOf` search for a value in the array
+from the start or back, respectively:
+
+	let letters = ['a', 'b', 'c', 'b', 'a'];
+	let firstA = letters.indexOf('a');    // 0
+	let lastA = letters.lastIndexOf('a'); // 4
+
+The optional second argument indicates at what index to start looking for the
+value:
+
+	let letters = ['a', 'b', 'c', 'b', 'a'];
+	let firstB = letters.indexOf('b', 2);    // 3, from index 2 upwards
+	let lastA = letters.lastIndexOf('a', 3); // 0, from index 3 downwards
+
+Applied to a string, the character at the given position is returned:
+
+	let word = "test";
+	let firstT = word.indexOf('t');    // 0
+	let lastT = word.lastIndexOf('t'); // 3
+
+The `slice` method returns a new array from the start index (inclusive) up to
+the optional end index (exclusive):
+
+	let arr = [1, 2, 3, 4, 5];
+	arr.slice(0, 3); // [1, 2, 3]
+	arr.slice(2);    // [3, 4, 5]
+
+The `concat` method appends the given array to the array the method is called
+on, and returns the resulting array, without modifying the original array:
+
+	let alpha = [1, 2, 3];
+	let omega = [7, 8, 9];
+	alpha.concat(omega); // [1, 2, 3, 7, 8, 9]
