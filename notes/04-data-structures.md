@@ -157,3 +157,78 @@ on, and returns the resulting array, without modifying the original array:
 	let alpha = [1, 2, 3];
 	let omega = [7, 8, 9];
 	alpha.concat(omega); // [1, 2, 3, 7, 8, 9]
+
+The `trim` method removes whitespace from the start and end of a string:
+
+	let s = '  what  ';
+	s.trim(); // 'what'
+
+A string can be padded to a desired width and a filling character using the
+`padStart` method:
+
+	let s = String(1);
+	s.padStart(4, '0'); // '0001'
+
+Strings can be split up at a given seperator using the `split` method:
+
+	let text = 'water tea coffee beer';
+	let drinks = text.split(' '); // ['water', 'tea', 'coffee', 'beer']
+
+An array can be concatenated to a string using the `join` method and a
+seperator:
+
+	let drinks = ['water', 'tea', 'coffee', 'beer'];
+	drinks.join(', '); // 'water, tea, coffee, beer'
+
+The `repeat` methods concatenates a string the given number of times:
+
+	let lo = 'lo';
+	let song = 'tro' + lo.repeat(10); // trololololololololololo
+
+Given the index, a character of a string at a given position is returned:
+
+	let s = 'foobar';
+	s[0]; // 'f'
+	s[s.length - 1]; // 'r'
+
+A variable number of arguments can be expected from a function, if the last
+parameter is preceeded by three dots (_rest parameters_):
+
+	function f(...args) {
+		// ...
+	}
+	f('foo', 'bar', 'qux');
+
+Within the function, the rest parameter is an array:
+
+	function sum(...numbers) {
+		let sum = 0;
+		for (let n of numbers) {
+			sum += n;
+		}
+		return sum;
+	}
+
+The pass an array as a rest parameter, the argument must be preceeded by three
+dots:
+
+	function sum(...numbers) {
+		// ...
+	}
+	let numbers = [1, 2, 3];
+	let addedUp = sum(...numbers);
+
+The `Math` object contains mathematical functions and constants:
+
+- `PI`: approximation of the number Pi
+- `random()`: pseudorandom number between 0 (inclusive) and 1 (exclusive)
+- `sin(x)`: Sine of `x`
+- `cos(x)`: Cosine of `x`
+- `floor(x)`: round `x` down to the next whole number
+- `ceil(x)`: round `x` up to the next whole number
+- `round(x)`: round `x` up or down to the nearest whole number
+
+Values from arrays and objects can be extracted using _destructuring_:
+
+	let arr = [1, 2, 3, 4];
+	let [one, two, three, four] = arr;
