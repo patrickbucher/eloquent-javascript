@@ -232,3 +232,14 @@ Values from arrays and objects can be extracted using _destructuring_:
 
 	let arr = [1, 2, 3, 4];
 	let [one, two, three, four] = arr;
+
+	let obj = {a: 1, b: 2, c: 3};
+	let {a, b, c} = obj;
+
+Objects can be converted to a JSON string using the `JSON.stringify` function,
+and from a JSON string back to a JavaScript object using the `JSON.parse`
+function:
+
+	let obj = {a: 1, b: 3, c: {d: 4, e: 5}};
+	let str = JSON.stringify(obj); // '{"a":1,"b":2,"c":{"d":3,"e":4}}'
+	obj = JSON.parse(str);
