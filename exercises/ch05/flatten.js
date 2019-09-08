@@ -1,4 +1,3 @@
-
 const flatten = arr => {
 	let result = arr.reduce((flattened, element) => {
 		if (typeof element === 'number') {
