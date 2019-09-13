@@ -160,8 +160,65 @@ A `Map` has various other methods:
 
 ## Symbols
 
-TODO: p. 106
+Symbols are a way to uniquely refer to an object's property, even though their
+underlying name is not unique:
+
+	const toString = Symbol('toString');
+	Array.prototype[toString] = function() {
+		return `Array with ${this.length} elements`;
+	};
+	console.log([1, 2].toString());  // 1,2
+	console.log([1, 2][toString]()); // Array with 2 elements
 
 ## Iterators
 
-TODO: p. 107
+Objects to be used in a `for`/`of` loop must be _iterable_, i.e. to have a
+function retrievable by the `Symbol.iterator` symbol that returns an
+_iterator_.
+
+An iterator must provide a `next()` method, which:
+
+1. Returns an object `{value: '[value]', done: '[boolean]'}`, with `value`
+   being the element currently pointed to in the collection, and `done`
+   indicating whether the iteration has reached the end, and
+2. modifies the inner state of the iterator in order to point to the next
+   element in the collection.
+
+	class Sequence {
+		constructor(from, to) {
+			this.from = from;
+			this.to = to;
+		}
+	}
+
+	class SequenceIterator {
+		constructor(sequence) {
+			this.sequence = sequence;
+			this.position = sequence.from;
+		}
+		next() {
+			if (this.position <= this.sequence.to) {
+				let value = this.position;
+				this.position++;
+				return { value, done: false };
+			}
+			return { value: undefined, done: true };
+		}
+	}
+
+	Sequence.prototype[Symbol.iterator] = function() {
+		return new SequenceIterator(this);
+	};
+
+	const seq = new Sequence(1, 5);
+	for (const i of seq) {
+		console.log(i);
+	}
+
+Output:
+
+	1
+	2
+	3
+	4
+	5
