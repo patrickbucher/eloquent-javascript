@@ -99,11 +99,89 @@ programming languages:
 	let dilbert = new Employee('Dilbert');
 	console.log(dilbert.sayHi()); // Output: "Hi, I'm Dilbert."
 
-TODO: Polymorphism (p. 105)
+Getters and setters allow to execute code when a classes property is read or
+written:
 
-TODO: Getters, Setters, Static (p. 109)
+	let dilbert = {
+		salary: 120000,
+		get monthlySalary() {
+			return this.salary / 12;
+		},
+		set monthlySalary(value) {
+			this.salary = 12 * value;
+		}
+	};
 
-TODO: Inheritance and instanceof (p. 111/112)
+	console.log(dilbert.monthlySalary); // 10000
+	dilbert.monthlySalary = 11000;
+	console.log(dilbert.salary);		// 132000
+	console.log(dilbert.monthlySalary); // 11000
+
+A static method can be invoked on the class rather than on its instances. One
+common use case it to provide static factory methods:
+
+	class Employee {
+		constructor(name, salary) {
+			this.name = name;
+			this.salary = salary;
+		}
+		static of(name, salary) {
+			if (salary < 0 || typeof name === 'undefined') {
+				return undefined;
+			}
+			return new Employee(name, salary);
+		}
+		toString() {
+			return `${this.name} ${this.salary}`;
+		}
+	}
+
+	console.log(Employee.of('Dilbert', 100000)); // Dilbert 100000
+	console.log(Employee.of('Asok', -10000));    // undefined
+
+Inheritance is supported using the `extends` keyword:
+
+	class Employee {
+		constructor(name, salary) {
+			this.name = name;
+			this.salary = salary;
+		}
+		toString() {
+			return `${this.name} ${this.salary}`;
+		}
+	}
+
+	class Manager extends Employee {
+		constructor(name, salary, benefits) {
+			super(name, salary);
+			this.benefits = benefits;
+		}
+		toString() {
+			return `${super.toString()} ${this.benefits}`;
+		}
+	}
+
+	const boss = new Manager('Pointy Haired Boss', 200000, 50000);
+	console.log(boss);
+
+The `instanceof` operator checks if an expression is an instance of a class or
+a subclass thereof:
+
+	const asok = new Employee('Asok', 36000);
+	const boss = new Manager('Pointy Haired Boss', 200000, 50000);
+
+	console.log('asok is a manager:', asok instanceof Manager);
+	console.log('asok is an employee:', asok instanceof Employee);
+
+	console.log('boss is a manager:', boss instanceof Manager);
+	console.log('boss is an employee:', boss instanceof Employee);
+
+Output:
+
+	asok is a manager: false
+	asok is an employee: true
+	boss is a manager: true
+	boss is an employee: true
 
 ## Map
 
