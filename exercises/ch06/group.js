@@ -33,6 +33,7 @@ class Group {
 		return group;
 	}
 }
+module.exports = Group;
 
 const employees = new Group();
 
